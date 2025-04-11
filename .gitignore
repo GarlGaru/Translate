@@ -1,6 +1,9 @@
-prompt
-src/srt
-src/test
+# environments
 .idea
 .venv
 
+
+prompt
+src/srt
+src/test
+src/promptIO

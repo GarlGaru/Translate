@@ -6,6 +6,13 @@ import FileIO
 from transformers import AutoTokenizer, AutoModelForCausalLM, TextStreamer
 
 def start():
+
+    prompt = FileIO.read_prompt_from_file()
+    generated_text = use_llama(prompt)
+    FileIO.write_output_to_file(generated_text)
+
+
+def use_llama(prompt):
     model_id = "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -16,11 +23,9 @@ def start():
         trust_remote_code=True
     )
 
-    prompt = FileIO.read_prompt_from_file()
 
     inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
 
-    streamer = TextStreamer(tokenizer)
 
     outputs = model.generate(
         **inputs,
@@ -32,8 +37,7 @@ def start():
         repetition_penalty=1.2 # 반복 패턴에 대한 패널티 부여
     )
 
-    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-    FileIO.write_output_to_file(generated_text)
 
-start()
+
