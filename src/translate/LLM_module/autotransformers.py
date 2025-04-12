@@ -1,37 +1,10 @@
-# import transformers
-# import torch
-# import ast
-import FileIO
-
-from transformers import AutoTokenizer, AutoModelForCausalLM, TextStreamer
-
-def start():
-
-    prompt = FileIO.read_prompt_from_file()
-    c_out("\nUsing this prompt : ")
-    print(prompt)
-
-    c_out("\n ***** Starting Text Generation ***** ")
-    generated_text = use_llama(prompt)
-
-    c_out("\n\nGenerated text is : ")
-    print(generated_text)
-    c_out("\n ***** Text Generation Done ***** ")
-
-    FileIO.write_output_to_file(generated_text)
-    c_out("Output is written in file")
-
-
-def c_out(text):
-    print("\033[32m", text, "\033[0m")
-
-def m_out(model_id):
-    print("\033[32m", "\nGenerate Text with :", "\033[0m", "\033[33m", model_id, "\033[0m")
+from . import printout
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
 
 def use_llama(prompt):
     model_id = "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
-    m_out(model_id)
+    printout.m_out(model_id)
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
 
@@ -60,6 +33,5 @@ def use_llama(prompt):
 
 def use_gemma(prompt):
     model_id = "google/gemma-3-4b-it"
-    m_out(model_id)
-
+    printout.m_out(model_id)
 

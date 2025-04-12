@@ -1,4 +1,4 @@
-import TextGenerator
+from LLM_module import TextGenerator
 
 def main():
     print(" --- Running main --- ")
