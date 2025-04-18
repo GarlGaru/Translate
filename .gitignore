@@ -7,3 +7,5 @@ prompt
 src/srt
 src/test
 src/promptIO
+
+LLM_models/*.gguf
