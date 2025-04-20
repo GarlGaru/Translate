@@ -1,11 +1,11 @@
-from . import printout
+from . import Printout
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 
 def use_llama(prompt):
     # model_id = "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
     model_id = "google/gemma-3-4b-it"
-    printout.m_out(model_id)
+    Printout.m_out(model_id)
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
 
@@ -35,5 +35,5 @@ def use_llama(prompt):
 
 def use_gemma(prompt):
     model_id = "google/gemma-3-4b-it"
-    printout.m_out(model_id)
+    Printout.m_out(model_id)
 
